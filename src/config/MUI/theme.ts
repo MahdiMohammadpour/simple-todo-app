@@ -1,9 +1,19 @@
 "use client";
-
+import Cookies from "js-cookie";
+//mui
 import { createTheme } from "@mui/material/styles";
+//fonts
+import { IranSans, Poppins } from "@/assets/fonts/constants";
 
+const locale = Cookies.get("NEXT_LOCALE") || process.env.NEXT_PUBLIC_DEF_LOCALE;
 const theme = createTheme({
-  direction: "rtl",
+  typography: {
+    fontFamily:
+      locale === "fa"
+        ? [Poppins, IranSans, "Arial", "Helvetica", "sans-serif"].join(",")
+        : [IranSans, Poppins, "Arial", "Helvetica", "sans-serif"].join(","),
+  },
+
   palette: {
     primary: {
       main: "#1976d2",
@@ -14,9 +24,6 @@ const theme = createTheme({
     background: {
       default: "#f5f5f5",
     },
-  },
-  typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
   },
 });
 

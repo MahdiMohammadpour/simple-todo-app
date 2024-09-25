@@ -2,7 +2,6 @@
 import ChangeLang from "@/components/ChangeLang";
 import { useTranslations } from "next-intl";
 import Typography from "@mui/material/Typography";
-import TextField from '@mui/material/TextField'
 
 export default function Home() {
   const t = useTranslations("HomePage");
@@ -11,10 +10,6 @@ export default function Home() {
     <>
       <Typography variant="h1">{t("welcome")}</Typography>
       <ChangeLang />
-      <TextField
-        id=""
-        label="سجاد"        
-      />
     </>
   );
 }

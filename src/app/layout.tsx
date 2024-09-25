@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-//fonts
-import localFont from "next/font/local";
 //mui
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 //css
@@ -11,17 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import Provider from "@/config/MUI/Provider";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
 
 export const metadata: Metadata = {
   title: "Base",
@@ -38,7 +26,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${poppinsLocalFont.variable} ${iranSansLocalFont.variable}`}
+      >
         <NextIntlClientProvider messages={messages}>
           <AppRouterCacheProvider options={{ key: "css" }}>
             <Provider>
