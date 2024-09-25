@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 //mui
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 //css
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 //i18n
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import Provider from "@/config/MUI/Provider";
+import MuiProvider from "@/config/MUI/Provider";
 import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
 
 export const metadata: Metadata = {
@@ -30,23 +29,21 @@ export default async function RootLayout({
         className={`${poppinsLocalFont.variable} ${iranSansLocalFont.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
-          <AppRouterCacheProvider options={{ key: "css" }}>
-            <Provider>
-              {children}
-              <ToastContainer
-                position="bottom-left"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-              />
-            </Provider>
-          </AppRouterCacheProvider>
+          <MuiProvider>
+            {children}
+            <ToastContainer
+              position="bottom-left"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
+          </MuiProvider>
         </NextIntlClientProvider>
       </body>
     </html>

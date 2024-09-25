@@ -9,8 +9,9 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
-export default function Provider({ children }: { children: ReactNode }) {
+export default function MuiProvider({ children }: { children: ReactNode }) {
   const locale =
     Cookies.get("NEXT_LOCALE") || process.env.NEXT_PUBLIC_DEF_LOCALE;
   const cacheRtl = createCache({
@@ -21,11 +22,13 @@ export default function Provider({ children }: { children: ReactNode }) {
     key: "mui",
   });
   return (
-    <CacheProvider value={locale === "fa" ? cacheRtl : cacheltR}>
-      <ThemeProvider theme={theme}>
-        {children}
-        <CssBaseline />
-      </ThemeProvider>
-    </CacheProvider>
+    <AppRouterCacheProvider options={{ key: "css" }}>
+      <CacheProvider value={locale === "fa" ? cacheRtl : cacheltR}>
+        <ThemeProvider theme={theme}>
+          {children}
+          <CssBaseline />
+        </ThemeProvider>
+      </CacheProvider>
+    </AppRouterCacheProvider>
   );
 }
