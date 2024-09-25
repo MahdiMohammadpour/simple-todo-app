@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 //fonts
 import localFont from "next/font/local";
 //mui
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import theme from "@/config/MUI/theme";
 //css
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 //i18n
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import Provider from "@/config/MUI/Provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +25,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Base",
-  description: "Nextjs + MUI + Axios + Amchart + Leaflet",
+  description: "Nextjs + MUI",
 };
 
 export default async function RootLayout({
@@ -43,8 +41,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <AppRouterCacheProvider options={{ key: "css" }}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
+            <Provider>
               {children}
               <ToastContainer
                 position="bottom-left"
@@ -58,7 +55,7 @@ export default async function RootLayout({
                 pauseOnHover
                 theme="colored"
               />
-            </ThemeProvider>
+            </Provider>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
