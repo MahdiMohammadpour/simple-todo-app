@@ -17,7 +17,7 @@ export default function ChangeLang() {
   };
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       onClick={() => {
         changeLanguage(Cookies.get("NEXT_LOCALE") === "fa" ? "en" : "fa");
       }}

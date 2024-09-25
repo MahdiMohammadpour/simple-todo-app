@@ -42,7 +42,7 @@ export default async function RootLayout({
     <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider messages={messages}>
-          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <AppRouterCacheProvider options={{ key: "css" }}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
               {children}
