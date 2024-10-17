@@ -8,6 +8,7 @@ This project uses [Next.js](https://nextjs.org/) along with several important li
 - **Formik**: For form handling and validation (with Yup).
 - **React Toastify**: For toast notifications.
 - **React Icons**: For adding icons.
+- **Redux Toolkit**: For state management.
 ### Prerequisites
 - **Node.js**: v16 or higher
 - **npm**: v7 or higher
