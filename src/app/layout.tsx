@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-//mui
+//redux
+import StoreProvider from "@/config/Redux/StoreProvider";
 //css
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,11 +8,13 @@ import { ToastContainer } from "react-toastify";
 //i18n
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+//mui
 import MuiProvider from "@/config/MUI/Provider";
+//fonts
 import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
 
 export const metadata: Metadata = {
-  title: "Base",
+  title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
   description: "Nextjs + MUI",
 };
 
@@ -28,23 +31,25 @@ export default async function RootLayout({
       <body
         className={`${poppinsLocalFont.variable} ${iranSansLocalFont.variable}`}
       >
-        <NextIntlClientProvider messages={messages}>
-          <MuiProvider>
-            {children}
-            <ToastContainer
-              position="bottom-left"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="colored"
-            />
-          </MuiProvider>
-        </NextIntlClientProvider>
+        <StoreProvider>
+          <NextIntlClientProvider messages={messages}>
+            <MuiProvider>
+              {children}
+              <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+              />
+            </MuiProvider>
+          </NextIntlClientProvider>
+        </StoreProvider>
       </body>
     </html>
   );
