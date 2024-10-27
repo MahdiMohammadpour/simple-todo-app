@@ -1,6 +1,7 @@
 {
-    "HomePage": {
-      "welcome": "سلام",
-      "change-lang": "تغییر زبان"
-    }
+  "HomePage": {
+    "welcome": "سلام",
+    "change-lang": "تغییر زبان",
+    "change-theme": "تغییر تم"
   }
+}

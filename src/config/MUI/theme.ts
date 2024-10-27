@@ -1,30 +1,41 @@
-"use client";
-import Cookies from "js-cookie";
-//mui
-import { createTheme } from "@mui/material/styles";
-//fonts
+// theme.ts
+import { createTheme, Theme } from "@mui/material/styles";
+import type { PaletteMode } from "@mui/material";
 import { IranSans, Poppins } from "@/assets/fonts/constants";
 
-const locale = Cookies.get("NEXT_LOCALE") || process.env.NEXT_PUBLIC_DEF_LOCALE;
-const theme = createTheme({
-  typography: {
-    fontFamily:
-      locale === "fa"
-        ? [Poppins, IranSans, "Arial", "Helvetica", "sans-serif"].join(",")
-        : [IranSans, Poppins, "Arial", "Helvetica", "sans-serif"].join(","),
-  },
-
-  palette: {
-    primary: {
-      main: "#1976d2",
+export function getTheme(mode: PaletteMode, locale: string): Theme {
+  return createTheme({
+    palette: {
+      mode,
+      primary: {
+        main: "#1976d2",
+      },
+      secondary: {
+        main: "#dc004e",
+      },
+      background: {
+        default: mode === "dark" ? "#121212" : "#f5f5f5",
+        paper: mode === "dark" ? "#1d1d1d" : "#ffffff",
+      },
+      text: {
+        primary: mode === "dark" ? "#ffffff" : "#000000",
+        secondary: mode === "dark" ? "#b3b3b3" : "#333333",
+      },
     },
-    secondary: {
-      main: "#dc004e",
+    typography: {
+      fontFamily:
+        locale === "fa"
+          ? [IranSans, "Arial", "Helvetica", "sans-serif"].join(",")
+          : [Poppins, "Arial", "Helvetica", "sans-serif"].join(","),
     },
-    background: {
-      default: "#f5f5f5",
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "none",
+          },
+        },
+      },
     },
-  },
-});
-
-export default theme;
+  });
+}

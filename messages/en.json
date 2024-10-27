@@ -1,6 +1,7 @@
 {
-    "HomePage": {
-      "welcome": "Hello",
-      "change-lang": "Change Language"
-    }
+  "HomePage": {
+    "welcome": "Hello",
+    "change-lang": "Change Language",
+    "change-theme": "Change Theme"
   }
+}
