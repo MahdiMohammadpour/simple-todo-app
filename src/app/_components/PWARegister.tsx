@@ -5,7 +5,7 @@ const PWARegister = () => {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/service-worker.js")
+        .register("/sw.js")
         .then((registration) => {
           console.log("✅ Service Worker Registered:", registration);
         })

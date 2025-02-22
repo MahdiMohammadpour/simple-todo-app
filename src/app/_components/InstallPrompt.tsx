@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => void;
@@ -14,9 +14,12 @@ const InstallPrompt: React.FC = () => {
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isIos, setIsIos] = useState(false);
 
   useEffect(() => {
-    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+    const userAgent = navigator.userAgent;
+    setIsMobile(/Mobi|Android|iPhone|iPad/i.test(userAgent));
+    setIsIos(/iPhone|iPad|iPod/i.test(userAgent) && /Safari/i.test(userAgent));
 
     if (localStorage.getItem("pwaInstalled")) {
       setIsInstalled(true);
@@ -54,7 +57,7 @@ const InstallPrompt: React.FC = () => {
     }
   };
 
-  if (!isMobile || isInstalled || !deferredPrompt) {
+  if (!isMobile || isInstalled || (!deferredPrompt && !isIos)) {
     return null;
   }
 
@@ -62,25 +65,34 @@ const InstallPrompt: React.FC = () => {
     <Box
       sx={{
         position: "fixed",
-        top: 0,
+        bottom: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        backgroundColor: "#fff",
+        padding: "1rem",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ffffff",
+        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
         zIndex: 9999,
       }}
     >
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleInstallClick}
-        sx={{ fontSize: "1.5rem", padding: "1rem 2rem" }}
-      >
-        نصب PWA
-      </Button>
+      {isIos ? (
+        <>
+          <Typography variant="body1" sx={{ textAlign: "center", mb: 1 }}>
+            برای نصب PWA، روی دکمه Share در Safari بزنید و سپس Add to Home Screen را انتخاب کنید.
+          </Typography>
+        </>
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleInstallClick}
+          sx={{ fontSize: "1.2rem", padding: "0.8rem 1.5rem" }}
+        >
+          نصب PWA
+        </Button>
+      )}
     </Box>
   );
 };
