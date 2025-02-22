@@ -14,6 +14,7 @@ import MuiProvider from "@/config/MUI/Provider";
 import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
 import Head from "next/head";
 import PWARegister from "./_components/PWARegister";
+import InstallPrompt from "./_components/InstallPrompt";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
@@ -63,6 +64,8 @@ export default async function RootLayout({
         <StoreProvider>
           <NextIntlClientProvider messages={messages}>
             <MuiProvider>
+              <InstallPrompt />
+
               {children}
               <PWARegister />
               <ToastContainer
