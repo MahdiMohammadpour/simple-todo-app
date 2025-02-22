@@ -21,7 +21,12 @@ const InstallPrompt: React.FC = () => {
     setIsMobile(/Mobi|Android|iPhone|iPad/i.test(userAgent));
     setIsIos(/iPhone|iPad|iPod/i.test(userAgent) && /Safari/i.test(userAgent));
 
-    if (localStorage.getItem("pwaInstalled")) {
+    const isPwaInstalled =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as Navigator & { standalone: boolean }).standalone ||
+      localStorage.getItem("pwaInstalled");
+
+    if (isPwaInstalled) {
       setIsInstalled(true);
       return;
     }
@@ -78,11 +83,10 @@ const InstallPrompt: React.FC = () => {
       }}
     >
       {isIos ? (
-        <>
-          <Typography variant="body1" sx={{ textAlign: "center", mb: 1 }}>
-            برای نصب PWA، روی دکمه Share در Safari بزنید و سپس Add to Home Screen را انتخاب کنید.
-          </Typography>
-        </>
+        <Typography variant="body1" sx={{ textAlign: "center", mb: 1 }}>
+          برای نصب PWA، روی دکمه Share در Safari بزنید و سپس Add to Home Screen
+          را انتخاب کنید.
+        </Typography>
       ) : (
         <Button
           variant="contained"
