@@ -15,6 +15,7 @@ import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
 import Head from "next/head";
 import PWARegister from "./_components/PWARegister";
 import InstallPrompt from "./_components/InstallPrompt";
+import NotificationHandler from "./_components/NotificationHandler";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
@@ -65,6 +66,7 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <MuiProvider>
               <InstallPrompt />
+              <NotificationHandler />
 
               {children}
               <PWARegister />
