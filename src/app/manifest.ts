@@ -8,6 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "./icon/icon-192.png",
         sizes: "192x192",
         type: "image/png",
+        purpose: "any",
       },
       {
         src: "./icon/icon-384.png",
@@ -25,5 +26,13 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "standalone",
     orientation: "portrait",
+    scope: "/",
+    description: "A Progressive Web App built with Next.js",
+    lang: "fa",
+    dir: "rtl",
+    categories: ["productivity"],
+    screenshots: [],
+    shortcuts: [],
+    prefer_related_applications: false,
   };
 }

@@ -16,6 +16,7 @@ import Head from "next/head";
 import PWARegister from "./_components/PWARegister";
 import InstallPrompt from "./_components/InstallPrompt";
 import NotificationHandler from "./_components/NotificationHandler";
+import OfflineDetector from "@/components/OfflineDetector";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
@@ -65,23 +66,25 @@ export default async function RootLayout({
         <StoreProvider>
           <NextIntlClientProvider messages={messages}>
             <MuiProvider>
-              <InstallPrompt />
-              <NotificationHandler />
+              <OfflineDetector>
+                <InstallPrompt />
+                <NotificationHandler />
 
-              {children}
-              <PWARegister />
-              <ToastContainer
-                position="bottom-left"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-              />
+                {children}
+                <PWARegister />
+                <ToastContainer
+                  position="bottom-left"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                />
+              </OfflineDetector>
             </MuiProvider>
           </NextIntlClientProvider>
         </StoreProvider>
