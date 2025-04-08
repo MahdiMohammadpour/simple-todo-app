@@ -8,18 +8,18 @@ export function getTheme(mode: PaletteMode, locale: string): Theme {
     palette: {
       mode,
       primary: {
-        main: "#1976d2",
+        main: "#62b6cb",
       },
       secondary: {
-        main: "#dc004e",
+        main: "#5fa8d3",
       },
       background: {
-        default: mode === "dark" ? "#121212" : "#f5f5f5",
-        paper: mode === "dark" ? "#1d1d1d" : "#ffffff",
+        default: mode === "dark" ? "#0d1b2a" : "#ffffff",
+        paper: mode === "dark" ? "#1b4965" : "#cae9ff",
       },
       text: {
         primary: mode === "dark" ? "#ffffff" : "#000000",
-        secondary: mode === "dark" ? "#b3b3b3" : "#333333",
+        secondary: mode === "dark" ? "#eef4ed" : "#335c67",
       },
     },
     typography: {

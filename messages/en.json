@@ -1,6 +1,12 @@
 {
   "HomePage": {
-    "welcome": "Hello",
+    "welcome": "welcome to BRN (Base React Next)",
+    "description": "To see the settings and features of this system, click the button below to go to the home page.",
+    "home": "Home",
+    "network": "Network",
+    "status": "Status",
+    "network-status": "Network Status",
+    "network-type": "Network Type",
     "change-lang": "Change Language",
     "change-theme": "Change Theme"
   }
