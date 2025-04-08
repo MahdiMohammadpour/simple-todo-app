@@ -50,7 +50,6 @@ export default function layout({
           sx={{
             height: "calc(100% - 60px)",
             overflow: "hidden",
-            alignItems: "center",
             borderRadius: "20px",
           }}
         >

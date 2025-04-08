@@ -5,9 +5,13 @@
     "home": "Home",
     "network": "Network",
     "status": "Status",
+    "icon": "Icon",
     "network-status": "Network Status",
     "network-type": "Network Type",
     "change-lang": "Change Language",
     "change-theme": "Change Theme"
+  },
+  "Icon": {
+    "view-exam-icon": "View Example for use icon"
   }
 }

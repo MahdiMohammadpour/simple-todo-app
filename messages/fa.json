@@ -5,9 +5,13 @@
     "home": "خانه",
     "network": "شبکه",
     "status": "وضعیت",
+    "icon": "آیکون",
     "network-status": "وضعیت اتصال",
     "network-type": "نوع اتصال",
     "change-lang": "تغییر زبان",
     "change-theme": "تغییر تم"
+  },
+  "Icon": {
+    "view-exam-icon": "نمایش یک مثال برای استفاده از ایکون"
   }
 }
