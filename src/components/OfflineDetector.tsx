@@ -1,8 +1,9 @@
 "use client";
 
+import { Box, Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 import type React from "react";
-import { useState, useEffect } from "react";
-import { Alert, Snackbar, Typography, Box, Button } from "@mui/material";
+import { useEffect, useState } from "react";
 import { CiWifiOff } from "react-icons/ci";
 
 interface OfflineDetectorProps {
@@ -11,7 +12,8 @@ interface OfflineDetectorProps {
 
 const OfflineDetector: React.FC<OfflineDetectorProps> = ({ children }) => {
   const [isOnline, setIsOnline] = useState<boolean>(true);
-  const [showOfflineMessage, setShowOfflineMessage] = useState<boolean>(false);
+
+  const translate = useTranslations("messages");
 
   useEffect(() => {
     // Set initial online status
@@ -20,12 +22,10 @@ const OfflineDetector: React.FC<OfflineDetectorProps> = ({ children }) => {
     // Event listeners for online/offline status changes
     const handleOnline = () => {
       setIsOnline(true);
-      setShowOfflineMessage(false);
     };
 
     const handleOffline = () => {
       setIsOnline(false);
-      setShowOfflineMessage(true);
     };
 
     window.addEventListener("online", handleOnline);
@@ -36,10 +36,6 @@ const OfflineDetector: React.FC<OfflineDetectorProps> = ({ children }) => {
       window.removeEventListener("offline", handleOffline);
     };
   }, []);
-
-  const handleClose = () => {
-    setShowOfflineMessage(false);
-  };
 
   return (
     <>
@@ -63,37 +59,9 @@ const OfflineDetector: React.FC<OfflineDetectorProps> = ({ children }) => {
           }}
         >
           <CiWifiOff style={{ marginRight: 1 }} />
-          <Typography variant="body2">
-            شما آفلاین هستید. برخی از قابلیت‌ها ممکن است در دسترس نباشند.
-          </Typography>
+          <Typography variant="body2">{translate("offlineError")}</Typography>
         </Box>
       )}
-
-      {/* Snackbar notification when going offline */}
-      <Snackbar
-        open={showOfflineMessage}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert
-          severity="warning"
-          variant="filled"
-          onClose={handleClose}
-          sx={{ width: "100%" }}
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => window.location.reload()}
-            >
-              تلاش مجدد
-            </Button>
-          }
-        >
-          اتصال اینترنت قطع شد. برخی از قابلیت‌ها ممکن است در دسترس نباشند.
-        </Alert>
-      </Snackbar>
     </>
   );
 };

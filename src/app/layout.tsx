@@ -2,26 +2,24 @@ import type { Metadata } from "next";
 //redux
 import StoreProvider from "@/config/Redux/StoreProvider";
 //css
-import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./globals.css";
 //i18n
-import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 //mui
 import MuiProvider from "@/config/MUI/Provider";
 //fonts
 import { iranSansLocalFont, poppinsLocalFont } from "@/assets/fonts";
+import OfflineDetector from "@/components/OfflineDetector";
+import Header from "@/components/header/Header";
 import Head from "next/head";
-import PWARegister from "./_components/PWARegister";
 import InstallPrompt from "./_components/InstallPrompt";
 import NotificationHandler from "./_components/NotificationHandler";
-import OfflineDetector from "@/components/OfflineDetector";
+import PWARegister from "./_components/PWARegister";
 
-export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
-  description: "Nextjs + MUI",
-};
+
 const metadata_pwa = {
   title: process.env.NEXT_PUBLIC_TITLE_PROJECT,
   description: "Nextjs + MUI",
@@ -36,6 +34,74 @@ const metadata_pwa = {
     { rel: "icon", url: "icon-512.png" },
   ],
 };
+export const metadata: Metadata = {
+  title: {
+    default: "مهدی محمدپور | توسعه‌دهنده فرانت‌اند",
+    template: "%s | مهدی محمدپور",
+  },
+  description:
+    "مهدی محمدپور، توسعه‌دهنده فرانت‌اند در تهران با تخصص در React، Next.js، TypeScript و Material UI. بیش از دو سال تجربه در توسعه وب‌اپلیکیشن‌های مدرن و کاربرپسند.",
+  keywords: [
+    "توسعه‌دهنده فرانت‌اند",
+    "برنامه‌نویس React",
+    "Next.js",
+    "TypeScript",
+    "Material UI",
+    "تهران",
+    "وب‌اپلیکیشن",
+    "Front-end Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Web Development",
+  ],
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
+  icons: [
+    { rel: "apple-touch-icon", url: "/icon-512.png" },
+    { rel: "icon", url: "/icon-512.png" },
+  ],
+  alternates: {
+    languages: {
+      "fa": "/fa",
+      "en": "/en",
+    },
+  },
+};
+
+// متا دیتای داینامیک برای هر زبان
+const getLocalizedMetadata = (locale: string) => ({
+  title:
+    locale === "fa"
+      ? "مهدی محمدپور | توسعه‌دهنده فرانت‌اند"
+      : "Mehdi Mohammadpour | Front-end Developer",
+  description:
+    locale === "fa"
+      ? "مهدی محمدپور، توسعه‌دهنده فرانت‌اند در تهران با تخصص در React، Next.js، TypeScript و Material UI. بیش از دو سال تجربه در توسعه وب‌اپلیکیشن‌های مدرن و کاربرپسند."
+      : "Mehdi Mohammadpour, a Front-end Developer in Tehran with expertise in React, Next.js, TypeScript, and Material UI. Over two years of experience in building modern, user-friendly web applications.",
+  keywords:
+    locale === "fa"
+      ? [
+          "توسعه‌دهنده فرانت‌اند",
+          "برنامه‌نویس React",
+          "Next.js",
+          "TypeScript",
+          "Material UI",
+          "تهران",
+          "وب‌اپلیکیشن",
+        ]
+      : [
+          "Front-end Developer",
+          "React Developer",
+          "Next.js Developer",
+          "TypeScript",
+          "Material UI",
+          "Tehran",
+          "Web Development",
+        ],
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -43,13 +109,14 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const localizedMetadata = getLocalizedMetadata(locale);
 
   return (
     <html lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
       <Head>
-        <title>{metadata_pwa.title}</title>
-        <meta name="description" content={metadata_pwa.description} />
-        <meta name="generator" content={metadata_pwa.generator} />
+        <title>{localizedMetadata.title}</title>
+        <meta name="description" content={localizedMetadata.description} />
+        <meta name="keywords" content={localizedMetadata.keywords.join(", ")} />
         <link rel="manifest" href={metadata_pwa.manifest} />
         <meta name="keywords" content={metadata_pwa.keywords.join(", ")} />
         {metadata_pwa.themeColor.map(({ media, color }, index) => (
@@ -69,7 +136,7 @@ export default async function RootLayout({
               <OfflineDetector>
                 <InstallPrompt />
                 <NotificationHandler />
-
+                <Header />
                 {children}
                 <PWARegister />
                 <ToastContainer

@@ -1,32 +1,36 @@
 "use client";
-import React, { useContext } from "react";
+import { useContext } from "react";
 // i18n
-import { useTranslations } from "next-intl";
 // mui
-import { IconButton } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { IconButton, SvgIcon, useTheme } from "@mui/material";
 // react-icons
-import { FiSun, FiMoon } from "react-icons/fi";
 // context
+import { Theme } from "@/assets/icons";
 import { ColorModeContext } from "@/config/MUI/Provider";
 
 export default function ChangeTheme() {
   const { toggleColorMode } = useContext(ColorModeContext);
   const theme = useTheme();
-  const t = useTranslations("HomePage");
-
+  const mode = theme.palette.mode;
   return (
     <IconButton
-      sx={{ ml: 1 }}
+      sx={{
+        bgcolor: mode === "dark" ? "#171F26" : "#FFFFFF",
+        border: mode === "dark" ? "none" : "1px solid #E7E7E7",
+        width: "56px",
+        height: "56px",
+      }}
       onClick={toggleColorMode}
       color="inherit"
-      aria-label={t("change-theme")}
     >
-      {theme.palette.mode === "dark" ? (
-        <FiSun size={20} />
-      ) : (
-        <FiMoon size={20} />
-      )}
+      <SvgIcon
+        sx={{
+          "& path": { fill: mode === "dark" ? "#A3ABB2" : "#3D3D3D" },
+        }}
+        viewBox=" 0 0 40 40"
+      >
+        <Theme  />
+      </SvgIcon>
     </IconButton>
   );
 }

@@ -1,1 +1,4 @@
-export { default as Arrow } from "./Arrow-1.svg";
+export { default as Theme } from "./Theme.svg";
+export { default as Location } from "./location.svg";
+export { default as Bale } from "./bale.svg";
+export { default as Telegram } from "./telegram.svg";

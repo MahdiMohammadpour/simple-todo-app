@@ -21,7 +21,7 @@ export default function MuiProvider({ children }: { children: ReactNode }) {
   const locale =
     Cookies.get("NEXT_LOCALE") || process.env.NEXT_PUBLIC_DEF_LOCALE;
   const [mode, setMode] = useState<PaletteMode>(
-    (Cookies.get("themeMode") as PaletteMode) || "light"
+    (Cookies.get("themeMode") as PaletteMode) || "dark"
   );
   const colorMode = useMemo(
     () => ({

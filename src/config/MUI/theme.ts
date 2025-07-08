@@ -1,26 +1,27 @@
 // theme.ts
-import { createTheme, Theme } from "@mui/material/styles";
-import type { PaletteMode } from "@mui/material";
 import { IranSans, Poppins } from "@/assets/fonts/constants";
+import type { PaletteMode } from "@mui/material";
+import { createTheme, Theme } from "@mui/material/styles";
 
 export function getTheme(mode: PaletteMode, locale: string): Theme {
   return createTheme({
     palette: {
       mode,
       primary: {
-        main: "#62b6cb",
+        main: mode === "dark" ? "#FFE071" : "#FBD144",
       },
       secondary: {
-        main: "#5fa8d3",
+        main: mode === "dark" ? "#171F26" : "#FFFFFF",
       },
       background: {
-        default: mode === "dark" ? "#0d1b2a" : "#ffffff",
-        paper: mode === "dark" ? "#1b4965" : "#cae9ff",
+        default: mode === "dark" ? "#0C151D" : "#E9EBEC",
+        paper: mode === "dark" ? "#0C151D" : "#fff",
       },
       text: {
-        primary: mode === "dark" ? "#ffffff" : "#000000",
-        secondary: mode === "dark" ? "#eef4ed" : "#335c67",
+        primary: mode === "dark" ? "#F1F2F4" : "#3D3D3D",
+        secondary: mode === "dark" ? "#A3ABB2" : "#575757",
       },
+      
     },
     typography: {
       fontFamily:
@@ -33,6 +34,8 @@ export function getTheme(mode: PaletteMode, locale: string): Theme {
         styleOverrides: {
           root: {
             textTransform: "none",
+            boxShadow:"none",
+            borderRadius:"10px"
           },
         },
       },
