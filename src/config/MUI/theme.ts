@@ -8,7 +8,7 @@ export function getTheme(mode: PaletteMode, locale: string): Theme {
     palette: {
       mode,
       primary: {
-        main: mode === "dark" ? "#FFE071" : "#FBD144",
+        main: mode === "dark" ? "#6ba6fdff" : "#609FFF",
       },
       secondary: {
         main: mode === "dark" ? "#171F26" : "#FFFFFF",
